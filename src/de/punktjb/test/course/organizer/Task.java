@@ -126,10 +126,10 @@ public class Task {
 		List<Title> sortedTitles = new FastList<>();
 
 		// sort/align titles using alignment values
-		aligments.forEach( i -> sortedTitles.addAll( titles.stream().filter( t -> t.getLength() == i ).collect(Collectors.toList()) ) );
+		aligments.forEach( i -> titles.stream().filter( t -> t.getLength() == i ).forEach(sortedTitles::add) );
 
 		// and then add rest ones
-		sortedTitles.addAll( titles.stream().filter( t -> !aligments.contains(t.getLength()) ).collect(Collectors.toList()) );
+		titles.stream().filter( t -> !aligments.contains(t.getLength()) ).forEach(sortedTitles::add);
 		
 		// go through sorted titles
 		sortedTitles.forEach(new Consumer<Title>() {
